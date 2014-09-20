@@ -1,7 +1,7 @@
 <html>
     <body>
         <h1><?php echo($str);?>&nbsp;&nbsp;<a>:<span>(</span></a></h1>
-        
+        <div id='au'><h5>ss框架&nbsp;&nbsp;火子集工作室强力驱动 &reg;2014-09</h5></div>
     </body>
 </html>
 <style>
@@ -14,6 +14,11 @@
         color:red;
         margin-top:100px;
         margin-left:100px;
+    }
+    #au{
+        position:absolute;
+        top:90%;
+        left:40%;
     }
     a{
         font-size:80px;
