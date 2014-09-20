@@ -14,4 +14,8 @@ class SS_Controller
         }
         include './app/view/'.$con."/".$view.".html";
     }
+    
+    public function assign($str,$val){
+    	$str = $val;
+    }
 }
