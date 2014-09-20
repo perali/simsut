@@ -25,3 +25,5 @@ function ssError($str=null){
 	empty($str)?$str='内部错误':$str=$str;
 	include_once './core/system/error/error.php';
 }
+
+

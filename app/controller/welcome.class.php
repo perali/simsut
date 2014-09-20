@@ -1,7 +1,9 @@
 <?php
 class welcome extends SS_Controller{
 	public function index(){
-		$this->assign('name', 'perali');
-	    $this->display();
+	    $smarty = new Smarty();
+	    $a = 'perali';
+	    $smarty->assign('a',$a);
+	    $smarty->display('welcome/index.tpl'); 
 	}
 }
