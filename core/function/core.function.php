@@ -90,5 +90,14 @@ function ssConMysql(){
  */
 
 function ssM($str=null){
-		return new ss_Model($str);
+	return new SS_Model($str);
+}
+
+/*
+ * 2014-09-23 by perali
+ * 框架smarty实例化函数
+ */
+
+function ssS(){
+	return new Smarty();
 }

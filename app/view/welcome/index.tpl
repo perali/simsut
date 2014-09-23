@@ -2,6 +2,9 @@
     <body>
                 这里是welcome的index页面！
                 {$a}
-				{$re.name}
+                {foreach from=$re item=rd}
+                	{$rd.name}
+                {/foreach}
+				
     </body>
 </html>
