@@ -17,7 +17,3 @@ $DATABASE  = 'perali';
 $DATAUSER  = 'root';
 //密码
 $DATAPWD   = 'root';
-//默认控制器
-$DEFAULT_CONTROLLER = 'welcome';
-//默认action
-$DEFAULT_ACTION = 'index';

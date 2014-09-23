@@ -16,7 +16,7 @@ function ssIndex(){
  *  框架设置控制器函数
  */
 function ssSetControler(){
-    include './app/config.php';
+    include './index.php';
     isset($_GET['c'])?$c=$_GET['c']:$c=$DEFAULT_CONTROLLER;
     isset($_GET['act'])?$act=$_GET['act']:$act=$DEFAULT_ACTION;
     //访问控制器
