@@ -45,7 +45,7 @@ function ssError($str=null){
 
 /*
  * 2014-09-20 by perali
- * 框架连接数据库函数
+ * 框架连接数据库函数并且判断
  */
 
 
@@ -83,3 +83,12 @@ function ssConMysql(){
     return $pdo;
 }
 
+
+/*
+ * 2014-09-22 by perali
+ * 框架模型实例化函数
+ */
+
+function ssM($str=null){
+		return new ss_Model($str);
+}

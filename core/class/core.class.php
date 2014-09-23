@@ -18,13 +18,33 @@ class ss_Model
 {
     protected $table;
     private   $pdo;
-    public function __construct($table=null){
-    	empty($table)?$this->table = get_class($this):$this->table = $table;
-    	$this->pdo = ssConMysql();
+    public function __construct($table){
+    	if(empty($table)){
+    		ssError('ssM函数参数不对,请根据手册传参');
+    	}else{
+            $this->table = $table;
+    	    $this->pdo = ssConMysql();
+        }
+    }   
+    public function selectAll(){
+    	return $this->pdo->query('select * from '.$this->table)->fetchAll();
     }
-   
-    public function select(){
-    	$result = $this->pdo->query('select * from '.$this->table)->fetchAll();
-    	return $result;
+    
+    public function selectOne($arr){
+    	if(!isset($arr)){
+    		ssError('selectOne函数参数不对,请根据手册传参');
+    	}else{
+    	    $sql = ' where ';
+    	        $con = 0;
+    	        foreach($arr as $key=>$val){
+    	           $con++;
+    	           if($con==count($arr)){
+    	              $sql.=$key."="."'".$val."'";
+    	           }else{
+    	              $sql.=$key."="."'".$val."'"." and ";
+    	           }
+                }	
+    		return $this->pdo->query('select * from '.$this->table.$sql)->fetch();
+    	}
     }
 }
