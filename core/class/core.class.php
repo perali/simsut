@@ -86,7 +86,12 @@ class SS_Model
     	}
     } 
     
-    
+    /*
+     * 默认删除模型所有数据,不需要传值
+     */
+    public function deleteAll(){
+    	return $this->pdo->query('delete from '.$this->table);
+    }
     
     
     
