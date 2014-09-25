@@ -18,7 +18,7 @@ class SS_Model
 {
     protected $table;
     private   $pdo;
-    public function __construct($table){
+    public function __construct($table=null){
     	if(empty($table)){
     		ssError('ssM函数参数不对,请根据手册传参');
     	}else{
@@ -35,7 +35,7 @@ class SS_Model
     /*
      * $arr not null 以关联数组的模式传参
      */
-    public function selectOne($arr){
+    public function selectOne($arr=null){
     	if(!isset($arr)){
     		ssError('selectOne函数参数不对,请根据手册传参');
     	}else{
@@ -57,7 +57,7 @@ class SS_Model
      * $str = ' * ';
      * $str2 = "id = '1'" 注意:传参中字符串务必使用单引号,外边用双引号
      */
-    public function selectQuery($str1,$str2=null){
+    public function selectQuery($str1=null,$str2=null){
     	if(empty($str1)){
     		ssError('selectQuery的参数不对,请根据手册传参');
     	}else{
@@ -73,7 +73,7 @@ class SS_Model
      * 最开放式的语句
      * $str 最完整的sql语句，但是单位select语句的时候,但会结果集数组,否则直接执行该语句
      */
-     public function query($str){
+     public function query($str=null){
     	if(empty($str)){
     		ssError('query参数不对，请根据手册传参');
     	}else{
@@ -93,8 +93,26 @@ class SS_Model
     	return $this->pdo->query('delete from '.$this->table);
     }
     
-    
-    
+    /*
+     * 和上述selectOne参数规则一致
+     */
+    public function deleteOne($arr=null){
+    	if(empty($arr)){
+    		ssError('deleteOne参数不对，请使用手册传参');
+    	}else{
+    		$sql = ' where ';
+    		$con = 0;
+    		foreach($arr as $key=>$val){
+    			$con++;
+    			if($con==count($arr)){
+    				$sql.=$key." = "."'".$val."'";
+    			}else{
+    				$sql.=$key." = "."'".$val."'"." and ";
+    			}
+    		}
+    		return $this->pdo->query('delete  from '.$this->table.$sql);
+    	}
+    }
     
     
 }
