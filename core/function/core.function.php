@@ -18,14 +18,14 @@ function ssIndex(){
 function ssSetControler(){
     include './index.php';
     isset($_GET['c'])?$c=$_GET['c']:$c=$DEFAULT_CONTROLLER;
-    isset($_GET['act'])?$act=$_GET['act']:$act=$DEFAULT_ACTION;
+    isset($_GET['a'])?$act=$_GET['a']:$act=$DEFAULT_ACTION;
     //访问控制器
     if(file_exists("./app/controller/".$c.".class.php")){
         include_once "./app/controller/".$c.".class.php";
         $con = new $c;
         $con->$act();
     }else{
-        ssError("当前控制器不存在！");
+        ssError("当前控制器或方法不存在！");
     }
     
 }
