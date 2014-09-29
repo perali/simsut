@@ -4,10 +4,6 @@
  * ss框架配置文件
  */
 
-
-
-// 数据库配置
-//连接类型mysql
 $DATATYPE  = 'mysql';
 //连接主机
 $DATAHOST  = 'localhost';
