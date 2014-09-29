@@ -10,6 +10,17 @@ include './app/config.php';
  */
 class SS_Controller
 {
+  public $ssS;
+  
+  public function __construct(){
+  	$this->ssS = ssS();
+  }
+  
+  public function ssM($str=null){
+  	return ssM($str);
+  }
+  
+  
   
 }
 
@@ -44,6 +55,7 @@ class SS_Model
     	    }
         }
     }  
+    
     /*
      * 默认无参,从当前模型表选出所有数据
      */ 
@@ -54,7 +66,7 @@ class SS_Model
      * $arr not null 以关联数组的模式传参
      */
     public function selectOne($arr=null){
-    	if(!isset($arr)){
+    	if(!isset($arr) || !ssIsArr($arr)){
     		ssError('selectOne函数参数不对,请根据手册传参');
     	}else{
     	    $sql = ' where ';
@@ -76,7 +88,7 @@ class SS_Model
      * $str2 = "id = '1'" 注意:传参中字符串务必使用单引号,外边用双引号
      */
     public function selectQuery($str1=null,$str2=null){
-    	if(empty($str1)){
+    	if(empty($str1) || !ssIsStr($str1) || !ssIsStr($str2)){
     		ssError('selectQuery的参数不对,请根据手册传参');
     	}else{
     	    if(empty($str2)){
@@ -92,7 +104,7 @@ class SS_Model
      * $str 最完整的sql语句，但是单位select语句的时候,但会结果集数组,否则直接执行该语句
      */
      public function query($str=null){
-    	if(empty($str)){
+    	if(empty($str) || !ssIsStr($str)){
     		ssError('query参数不对，请根据手册传参');
     	}else{
     	    if(substr($str,0,1)=='s'){
@@ -115,7 +127,7 @@ class SS_Model
      * 和上述selectOne参数规则一致
      */
     public function deleteOne($arr=null){
-    	if(empty($arr)){
+    	if(empty($arr) || !ssIsArr($arr)){
     		ssError('deleteOne参数不对，请使用手册传参');
     	}else{
     		$sql = ' where ';
@@ -133,10 +145,10 @@ class SS_Model
     }
     
     /*
-     * 
+     * 添加一条数据，参数是数组一一对应的模式
      */
  	public function addOne($arr=null){
- 		if(empty($arr))ssError('addOne参数不对，请使用参考手册');
+ 		if(empty($arr) || !ssIsArr($arr))ssError('addOne参数不对，请使用参考手册');
  		else{
  			$sql = 'insert into '.$this->table."(";
  			$con = 0;
@@ -155,6 +167,37 @@ class SS_Model
  			$sql .=')';
  		}if($this->pdo->exec($sql)==null)return 0;else return 1;
  	}
+ 	
+ 	/*
+ 	 * 修改数据 参数2,是where后面的数据  参数1是set后面的数据
+ 	 */
+ 	public function updateOne($arr1=null,$arr2=null){
+ 		if(empty($arr1) || empty($arr2) || !ssIsArr($arr1) || !ssIsArr($arr2))ssError('updateOne参数不对，请使用参考手册');
+ 		else{
+ 			$sql = "update ".$this->table." set ";
+ 			$con = 0;
+ 			foreach($arr1 as $key=>$val){
+ 				$con++;
+ 				if($con == count($arr1)){
+ 					$sql .= "{$key}='{$val}'";
+ 				}else{
+ 					$sql .= "{$key}='{$val}',";
+ 				}
+ 			}
+ 			$con =0;
+ 			$sql .=" where ";
+ 			foreach($arr2 as $key=>$val){
+ 				$con++;
+ 				if($con == count($arr2)){
+ 					$sql .="{$key}='{$val}'";
+ 				}else{
+ 					$sql .="{$key}='{$val}' and ";
+ 				}
+ 			}
+ 		}
+ 		if($this->pdo->exec($sql)==null)return 0;else return 1;
+ 	}
+ 	
 }
 
 
@@ -205,6 +248,28 @@ class SS_ConnentMysql
 	
 }
 
+/*
+ * ------------------------------------------------------------------------------------------------
+* =================================================================================================
+* 2014-09-29 by perali
+* ss 单例模式,smarty类
+* =================================================================================================
+* -------------------------------------------------------------------------------------------------
+*/
 
+class SS_Smarty
+{	
+	private static $instance;
+	private static $smarty;
+	
+	public function __construct(){
+		self::$smarty = new Smarty(); 
+	}
+	
+	public static function getInstance(){
+		if(self::$instance==null)self::$instance=new self();
+		return self::$smarty;
+	}
+}
 
 

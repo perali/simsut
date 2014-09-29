@@ -30,14 +30,13 @@ function ssSetControler(){
     
 }
 
-
 /*
  * 2014-09-19 by perali
  * 框架的错误处理函数
  */
 
-function ssError($str=null){
-	empty($str)?$str='内部错误':$str=$str;
+function ssError($str1=null){
+	empty($str1)?$str='内部错误':$str=$str1;
 	include_once './core/system/error/error.php';
 	die();
 }
@@ -55,8 +54,8 @@ function ssConnentMysql(){
 
 
 /*
- * 2014-09-20 by perali
-*  框架单纯连接数据库函数,返回pdo
+* 2014-09-20 by perali
+*  框架单纯连接数据库函数,返回pdo操作对象
 */
 
 function ssConMysql(){
@@ -79,5 +78,23 @@ function ssM($str=null){
  */
 
 function ssS(){
-	return new Smarty();
+	return SS_Smarty::getInstance();
+}
+
+/*
+ * 2014-09-29 by perali
+ * 判断变量是否为数组
+ */
+
+function ssIsArr($arr=null){
+	if(is_array($arr))return true;else return false;
+}
+
+/*
+ * 2014-09-29 by perali
+ * 判断变量是否为字符串
+ */
+
+function ssIsStr($str=null){
+	if(is_string($str))return true;else return false;
 }
