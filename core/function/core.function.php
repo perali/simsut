@@ -45,42 +45,22 @@ function ssError($str=null){
 
 /*
  * 2014-09-20 by perali
- * 框架连接数据库函数并且判断
+ * 框架连接数据库函数
  */
 
 
 function ssConnentMysql(){
-    include './app/config.php';
-	if(!empty($DATABASE)){
-        $dsn = $DATATYPE.":host=".$DATAHOST.";dbname=".$DATABASE;
-        Try
-        {
-            $pdo = new PDO($dsn, $DATAUSER, $DATAPWD); 
-            $pdo->exec("SET names utf8");
-            return true;
-        }
-        Catch (PDOException $e)
-        {
-            ssError('数据库未连接成功,请检查配置文件!');
-            return false;
-        }
-	}else{
-		return true;
-	}
+	return SS_ConnentMysql::getInstance();
 }
 
 
 /*
  * 2014-09-20 by perali
-*  框架单纯连接数据库函数
+*  框架单纯连接数据库函数,返回pdo
 */
 
 function ssConMysql(){
-    include './app/config.php';
-    $dsn = $DATATYPE.":host=".$DATAHOST.";dbname=".$DATABASE;
-    $pdo = new PDO($dsn, $DATAUSER, $DATAPWD);
-    $pdo->exec("SET names utf8");
-    return $pdo;
+    return SS_ConnentMysql::getPdo();
 }
 
 

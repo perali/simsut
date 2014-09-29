@@ -1,7 +1,12 @@
 <?php
+include './app/config.php';
 /*
+ * -------------------------------------------------------------------------------------------------
+ * -------------------------------------------------------------------------------------------------
  * 2014-09-19 by perali
  * ss 核心控制器类
+ * -------------------------------------------------------------------------------------------------
+ * -------------------------------------------------------------------------------------------------
  */
 class SS_Controller
 {
@@ -9,10 +14,19 @@ class SS_Controller
 }
 
 
+
+
+
+
 /*
- * 2014-09-20
+ * -------------------------------------------------------------------------------------------------
+ * =================================================================================================
+ * 2014-09-20 by perali
  * ss 核心模型类
+ * =================================================================================================
+ * -------------------------------------------------------------------------------------------------
  */
+
 
 class SS_Model
 {
@@ -24,6 +38,10 @@ class SS_Model
     	}else{
             $this->table = $table;
     	    $this->pdo = ssConMysql();
+    	    if($this->pdo == null){
+    	    	ssError('数据库未连接成功,无法实例化模型,请检查配置文件!');
+    	    	die();
+    	    }
         }
     }  
     /*
@@ -80,7 +98,7 @@ class SS_Model
     	    if(substr($str,0,1)=='s'){
     	        return $this->pdo->query($str)->fetchAll();
     	    }else{
-    	        if($this->pdo->query($str)){return true;}else{return false;}
+    	        if($this->pdo->exec($str)==null){return 0;}else{return 1;}
     	    }
     		
     	}
@@ -90,7 +108,7 @@ class SS_Model
      * 默认删除模型所有数据,不需要传值
      */
     public function deleteAll(){
-    	return $this->pdo->query('delete from '.$this->table);
+    	if($this->pdo->exec('delete from '.$this->table)==null)return 0;else return 1;
     }
     
     /*
@@ -110,9 +128,83 @@ class SS_Model
     				$sql.=$key." = "."'".$val."'"." and ";
     			}
     		}
-    		return $this->pdo->query('delete  from '.$this->table.$sql);
+    		if($this->pdo->exec('delete  from '.$this->table.$sql)==null)return 0;else return 1;
     	}
     }
     
-    
+    /*
+     * 
+     */
+ 	public function addOne($arr=null){
+ 		if(empty($arr))ssError('addOne参数不对，请使用参考手册');
+ 		else{
+ 			$sql = 'insert into '.$this->table."(";
+ 			$con = 0;
+ 			foreach($arr as $key=>$val){
+ 				$con++;
+ 				if($con==count($arr))$sql .= "{$key}";
+ 				else $sql .="{$key},";
+ 			}
+ 			$sql .=") values (";
+ 			$con = 0;
+ 			foreach ($arr as $key=>$val){
+ 				$con++;
+ 				if($con==count($arr))$sql .="'{$val}'";
+ 				else $sql .="'{$val}'".",";
+ 			}
+ 			$sql .=')';
+ 		}if($this->pdo->exec($sql)==null)return 0;else return 1;
+ 	}
 }
+
+
+
+
+/*
+ * ------------------------------------------------------------------------------------------------
+* =================================================================================================
+* 2014-09-29 by perali
+* ss 单例模式,数据库类
+* =================================================================================================
+* -------------------------------------------------------------------------------------------------
+*/
+
+class SS_ConnentMysql
+{
+	private static $instance;
+	private static $pdo;
+	public function __construct(){
+		include './app/config.php';
+		if(!empty($DATABASE)&&!empty($DATAUSER)){
+	        $dsn = $DATATYPE.":host=".$DATAHOST.";dbname=".$DATABASE;
+	        Try
+	        {
+	            self::$pdo = new PDO($dsn, $DATAUSER, $DATAPWD); 
+	            self::$pdo->exec("SET names utf8");
+	            return true;
+	        }
+	        Catch (PDOException $e)
+	        {
+	            ssError('数据库未连接成功,请检查配置文件!');
+	            return false;
+	        }
+		}else{
+			return true;
+		}
+	}
+	
+	public static function getInstance(){
+		if(self::$instance==null)self::$instance=new self();
+		return self::$instance;
+	}
+	
+	public static  function getPdo(){
+		if(self::$pdo==null)self::getInstance();
+		return self::$pdo;
+	}
+	
+}
+
+
+
+

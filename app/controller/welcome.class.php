@@ -8,8 +8,9 @@ class welcome extends SS_Controller{
 	    //$re = ssM('test')->selectQuery(" * ","id='5' and name='terry'");
 	    $re = ssM('test')->query('delete from test where id=3');
 	    $smarty->assign('re',$re); */
-	    //$re = ssM('test')->deleteAll();
-	    ssM('test')->deleteOne(array('id'=>2,'name'=>3));
+	    //echo ssM('test')->deleteAll();
+	   	echo ssM('test')->deleteOne(array('id'=>6,'name'=>'perali'));
+	   	//echo(1);
 	    //$smarty->assign('re',$re);
 	    $smarty->display('welcome/index.tpl'); 
 	}
