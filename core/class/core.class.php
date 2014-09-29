@@ -11,9 +11,11 @@ include './app/config.php';
 class SS_Controller
 {
   public $ssS;
-  
+  public $ssPath;
   public function __construct(){
   	$this->ssS = ssS();
+  	$this->ssPath = "./app/view/source";
+  	$this->ssS->assign('ssPath',$this->ssPath);
   }
   
   public function ssM($str=null){
@@ -84,7 +86,7 @@ class SS_Model
     }
     /*
      * $str $str2 默认分割select语句,例:select * from test where id =1
-     * $str = ' * ';
+     * $str1 = ' * ';
      * $str2 = "id = '1'" 注意:传参中字符串务必使用单引号,外边用双引号
      */
     public function selectQuery($str1=null,$str2=null){
@@ -101,7 +103,7 @@ class SS_Model
     
     /*
      * 最开放式的语句
-     * $str 最完整的sql语句，但是单位select语句的时候,但会结果集数组,否则直接执行该语句
+     * $str 最完整的sql语句，如是select语句的时候,但会结果集数组,否则直接执行该语句
      */
      public function query($str=null){
     	if(empty($str) || !ssIsStr($str)){

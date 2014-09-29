@@ -620,7 +620,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
          * 2014-09-20 by perali
          * 修改模板默认路径，植入ss框架
          */
-        $this->setTemplateDir('./app/view')
+        $this->setTemplateDir('./app/view/tpl')
             ->setCompileDir('./app/other/templates_c')
             ->setPluginsDir(SMARTY_PLUGINS_DIR)
             ->setCacheDir('./app/other/cache')
