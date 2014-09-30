@@ -11,16 +11,27 @@ include './app/config.php';
 class SS_Controller
 {
   public $ssS;
-  public $ssPath;
+  
+  public $ssSPath;
+  
+  public $ssCPath;
+  
+  
   public function __construct(){
   	$this->ssS = ssS();
-  	$this->ssPath = "./app/view/source";
-  	$this->ssS->assign('ssPath',$this->ssPath);
+  	$this->ssSPath = "./app/view";
+  	$this->ssCPath = "./app/controller/".get_class($this).".class.php";
+  	$this->ssS->assign('ssSPath',$this->ssSPath);
+  	$this->ssS->assign("ssCPath",$this->ssCPath);
   }
   
   public function ssM($str=null){
   	return ssM($str);
   }
+  
+  public function ssPostUrl($str){
+  	return "./index.php?c=".get_class($this)."&a=".$str;
+  } 
   
   
   

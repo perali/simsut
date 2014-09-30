@@ -14,14 +14,18 @@ class welcome extends SS_Controller{
 	   	//echo(1);
 	    //$smarty->assign('re',$re);
 	    //echo 1;
+	    //print_r($_POST);
+	    //echo $this->ssAU('test');
+	   	$this->ssS->assign('post_url',$this->ssPostUrl('test'));
 	   	$this->ssS->display('welcome/index.tpl');
-	    $this->ssM('test')->deleteAll();
-	    //print_r($this->ssS);//->display('welcome/index.tpl');
+	    //$this->ssM('test')->deleteAll();
+	    //$this->ssS->display('welcome/index.tpl');
 	    //$smarty->display('welcome/index.tpl'); 
 	}
 	
 	
 	public function test(){
-		//ssS()->display('welcome/test.tpl');
+		print_r($_POST);
+		ssS()->display('welcome/test.tpl');
 	}
 }
