@@ -6,6 +6,7 @@ class welcome extends SS_Controller{
 	
 	
 	public function test(){
+		//$this->ssFail('a');
 		$this->ssS->display('welcome/test.tpl');
 	}
 	

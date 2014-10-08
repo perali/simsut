@@ -38,12 +38,16 @@ function ssSetControler(){
     //访问控制器
     if(file_exists("./app/controller/".$c.".class.php")){
         include_once "./app/controller/".$c.".class.php";
-        try {
+        try{
         	$con = new $c;
+        	if(method_exists($con,$act)){
+        		$con->$act();
+        	}else{
+        		throw new Exception("this class have no method of "."'$act'");
+        	}
         }catch(Exception $e){
-        	ssError('此控制器该方法不存在');
+        	ssError($e->getMessage());
         }
-        $con->$act();
     }else{
         ssError("当前控制器不存在！");
     }
@@ -57,7 +61,7 @@ function ssSetControler(){
 
 function ssError($str1=null){
     empty($str1)?$str='内部错误':$str=$str1;
-    include_once './core/system/error/error.php';
+    include_once './core/system/error.php';
     die();
 }
 
