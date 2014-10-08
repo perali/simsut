@@ -31,8 +31,9 @@ class SS_Controller
   }
   
   public function ssPostUrl($str){
-  	return "./index.php?m=".ssRandStr('20')."&c=".get_class($this)."&n=".ssRandStr('20')."&a=".$str;
-  } 
+  	return "./index.php?m=".ssRandStr('20')."&c=".get_class($this)."&n="
+  			.ssRandStr('20')."&a=".$str."&o=".ssRandStr('20');
+  }  
   
   
 }
