@@ -1,4 +1,41 @@
 body{
-	color:red;
-	font-size:40px;
+	background:#ccc;
+	margin-top:100px;
+	color:#333;
+}
+div{
+	border:0px solid #fff;
+	width:60%;
+	margin:auto;
+	padding:40px 100px;
+}
+h1{
+	font-size:30px;
+	position:relative;
+	top:-10px;
+	left:20px;
+}
+h1 a{
+	font-size:14px;
+}
+p{
+	width:80%;
+	margin:auto;
+}
+h3{
+	text-align:center;
+	font-size:12px;
+	color:#333;
+	margin-top:50px;
+}
+.center{
+	padding:20px;
+	width:90%;
+	border:3px solid #ddd;
+	font-size:12px;
+	line-height:24px;
+	color:#666;
+}
+.center a{
+	text-decoration:none;
 }

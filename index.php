@@ -1,5 +1,5 @@
 <?php
-include_once './core/include.php';
+include_once './core/system/include.php';
 /*	
  * ss框架唯一入口文件
  */
