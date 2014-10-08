@@ -20,6 +20,7 @@ class SS_Controller
   
   public function __construct(){
   	$this->ssS = ssS();
+  	$this->ssS->caching = 1;
   	$this->ssSPath = "./app/view";
   	$this->ssCPath = "./app/controller/".get_class($this).".class.php";
   	$this->ssS->assign('ssSPath',$this->ssSPath);
