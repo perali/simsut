@@ -43,13 +43,13 @@ function ssSetControler(){
         	if(method_exists($con,$act)){
         		$con->$act();
         	}else{
-        		throw new Exception("this class have no method of "."'$act'");
+        		throw new Exception("This class "."'$c'"." have no method of "."'$act'");
         	}
         }catch(Exception $e){
         	ssError($e->getMessage());
         }
     }else{
-        ssError("当前控制器不存在！");
+        ssError("This class "."'$c'"." is no exist");
     }
 
 }
@@ -60,7 +60,7 @@ function ssSetControler(){
 */
 
 function ssError($str1=null){
-    empty($str1)?$str='内部错误':$str=$str1;
+    empty($str1)?$str='Internal Error':$str=$str1;
     include_once './core/system/error.php';
     die();
 }
