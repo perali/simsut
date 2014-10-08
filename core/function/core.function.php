@@ -38,10 +38,14 @@ function ssSetControler(){
     //访问控制器
     if(file_exists("./app/controller/".$c.".class.php")){
         include_once "./app/controller/".$c.".class.php";
-        $con = new $c;
+        try {
+        	$con = new $c;
+        }catch(Exception $e){
+        	ssError('此控制器该方法不存在');
+        }
         $con->$act();
     }else{
-        ssError("当前控制器或方法不存在！");
+        ssError("当前控制器不存在！");
     }
 
 }
