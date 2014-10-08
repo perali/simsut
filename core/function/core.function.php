@@ -1,6 +1,20 @@
 <?php
 header('Content-type:text/html;Charset=utf-8');
 
+/*
+ * 2014-10-08 by perali 
+ * 随你生产需要的位数字符串
+ */
+
+function ssRandStr($num){
+	if(empty($num)){ssError('请传必要的参数');}else{
+		$strMother = 'qwertyuioplkjhgfdsazxcvbnm1234567890';
+  		for($i=0;$i<$num;$i++){
+  			$strSon .= $strMother[rand(0,35)];
+  		}
+  		return md5($strSon);
+	};
+}
 
 /*
  * 2014-09-19 by perali
