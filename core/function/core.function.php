@@ -9,12 +9,51 @@ header('Content-type:text/html;Charset=utf-8');
 function ssRandStr($num){
 	if(empty($num)){ssError('请传必要的参数');}else{
 		$strMother = 'qwertyuioplkjhgfdsazxcvbnm1234567890';
+		$strSon = '';
   		for($i=0;$i<$num;$i++){
   			$strSon .= $strMother[rand(0,35)];
   		}
   		return md5($strSon);
 	};
 }
+
+
+/*
+ * 2014-10-09 by perali
+* 合并两个数组
+*/
+
+function ssMergeArr($arr1=null,$arr2=null,$isKey=null){
+	if(ssIsArr($arr1) && ssIsArr($arr2)){
+		$arr = array();
+		if($isKey){
+			$arr = $arr1;
+			foreach($arr2 as $key=>$val){
+				$arr[$key] = $val;
+			}
+		}else{
+			$arr = array_merge($arr1,$arr2);
+		}
+		return $arr;
+	}else{
+		ssError('参数类型不对,请使用参考手册！');
+	}
+}
+
+
+/*
+ * 2014-10-09 by perali
+ * 上传图片文件函数
+ */
+
+function ssUploadImg($name){
+	if(empty($_FILES[$name])){
+		return -1;
+	}else{
+		
+	}
+}
+
 
 /*
  * 2014-09-19 by perali
@@ -122,3 +161,4 @@ function ssIsArr($arr=null){
 function ssIsStr($str=null){
     if(is_string($str))return true;else return false;
 }
+
