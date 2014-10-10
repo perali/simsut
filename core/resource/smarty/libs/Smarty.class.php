@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Project:     Smarty: the PHP compiling template engine
