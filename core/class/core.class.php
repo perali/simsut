@@ -17,12 +17,15 @@ class SS_Controller
   
   public $ssCPath;//控制器路径
   
+  public $ssMPath;//模型路径
   
   public function __construct(){
   	$this->ssS = ssS();
   	$this->ssS->caching = 1;
   	$this->ssSPath = "./app/view";
   	$this->ssCPath = "./app/controller/".get_class($this).".class.php";
+  	$this->ssMPath = "./app/model/".get_class($this).".model.php";
+  	include_once $this->ssMPath;
   	$this->ssS->assign('ssSPath',$this->ssSPath);
   	$this->ssS->assign("ssCPath",$this->ssCPath);
   }
@@ -71,7 +74,10 @@ class SS_Model
     	    }
         }
     }  
-    
+      
+    public function ssM($table=null){
+    	return SS_Controller::ssM($table);
+    }
     /*
      * 默认无参,从当前模型表选出所有数据
      */ 
@@ -290,5 +296,9 @@ class SS_Smarty
 }
 
 
+/*
+ * 2014-10-13 by perali
+ * 模型类
+ */
 
 

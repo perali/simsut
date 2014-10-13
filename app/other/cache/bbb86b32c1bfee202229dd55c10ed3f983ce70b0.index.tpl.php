@@ -5,17 +5,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'bbb86b32c1bfee202229dd55c10ed3f983ce70b0' => 
     array (
       0 => '.\\app\\view\\welcome\\index.tpl',
-      1 => 1412733722,
+      1 => 1413207543,
       2 => 'file',
     ),
   ),
   'nocache_hash' => '27905543602cd031e69-56028677',
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_543631d3e318e9_61643998',
-  'has_nocache_code' => false,
   'cache_lifetime' => 3600,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_543bd698d394f7_10874846',
+  'variables' => 
+  array (
+    'ssSPath' => 0,
+  ),
+  'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_543631d3e318e9_61643998')) {function content_543631d3e318e9_61643998($_smarty_tpl) {?><html>
+<?php if ($_valid && !is_callable('content_543bd698d394f7_10874846')) {function content_543bd698d394f7_10874846($_smarty_tpl) {?><html>
 <link rel="stylesheet" type="text/css" href="./app/view/welcome/css/index.css" />
 <script src='./app/view/welcome/js/index.js'></script>
     <body>
