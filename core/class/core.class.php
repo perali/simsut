@@ -25,7 +25,10 @@ class SS_Controller
   	$this->ssSPath = "./app/view";
   	$this->ssCPath = "./app/controller/".get_class($this).".class.php";
   	$this->ssMPath = "./app/model/".get_class($this).".model.php";
-  	include_once $this->ssMPath;
+  	if (is_file($this->ssMPath))
+  	{
+  	    include_once $this->ssMPath;
+  	}
   	$this->ssS->assign('ssSPath',$this->ssSPath);
   	$this->ssS->assign("ssCPath",$this->ssCPath);
   }

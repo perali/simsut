@@ -7,7 +7,7 @@ $DATATYPE  = 'mysql';
 //连接主机
 $DATAHOST  = 'localhost';
 //连接数据库
-$DATABASE  = 'perali';
+$DATABASE  = 'sedy';
 //用户名
 $DATAUSER  = 'root';
 //密码

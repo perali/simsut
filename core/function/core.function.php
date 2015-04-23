@@ -162,3 +162,11 @@ function ssIsStr($str=null){
     if(is_string($str))return true;else return false;
 }
 
+/*
+ * 2015-04-22 by bocley
+ * 自定义加密函数
+ */
+function ssMd5($name,$pwd)
+{
+   return md5($name . $pwd . strlen($name) . strlen($pwd));
+}
